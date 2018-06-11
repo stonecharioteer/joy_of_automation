@@ -15,10 +15,16 @@ available_networks = sta_if.scan()
 with open("networks.json", "r") as f:
     network_data = json.load(f)
 
-# Disable access point.
 ap_if = network.WLAN(network.AP_IF)
-if ap_if.active():
-    ap_if.active(False)
+if not ap_if.active():
+    ap_if.active(True)
+
+with open("accesspoint.json", "r") as f:
+    access_point = json.load(f)
+    ap_if.config(
+        essid=access_point["essid"], 
+        channel=access_point["channel"],
+        password=access_point["password"])
 
 for network in available_networks:
     network_name = network[0].decode()
