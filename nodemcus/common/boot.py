@@ -3,7 +3,6 @@
 #esp.osdebug(None)
 import gc, webrepl, network
 import ujson as json
-import light
 
 webrepl.start()
 
@@ -27,6 +26,4 @@ for network in available_networks:
         sta_if.connect(network_name, network_data[network_name])
         break
 
-light.clear()
-light.clear() # added it a second time to just flush out remnants.
 gc.collect()
